@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RSS Home page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>WEBSITES TO RSS PARSER</h1>
+        <p>By Yuranous inc.</p>
+    </div>
+    <div class="container">
+        <ul class="list-group">
+            <li class="list-group-item" th:each="rss : ${rssList}">
+                <div class="row">
+                    <div class="col">
+                        <a class="title" th:href="@{~/rss/file(id=${rss.getId()})}"
+                           th:text="${rss.getTitle()}">Rss url</a>
+                    </div>
+                    <div class="col">
+                        <div class="btn-group">
+                            <a class="btn btn-primary " th:href="@{~/rss/delete(id=${rss.getId()})}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+
+        </ul>
+    </div>
+    <div>
+        <form class="form-check" method="post" th:action="@{~/rss/add}">
+            <div class="form-group">
+                <label for="url">URL to create Feed:</label>
+                <input id="url" class="form-control" placeholder="Enter url" th:name="url">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+    </div>
+</body>
+</html>
